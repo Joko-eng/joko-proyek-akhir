@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <style></style>
+
+    <title>Story App</title>
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+    <link rel="manifest" href="app.webmanifest" />
+  </head>
+  <body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+      <div class="main-header container">
+        <a class="brand-name" href="#/">Proyek akhir</a>
+
+        <nav id="navigation-drawer" class="navigation-drawer">
+          <ul id="nav-list" class="nav-list">
+            <li class="nav-item active">
+              <a href="#/bookmarks" class="nav-link">
+                <i class="icon-bookmark"></i> Laporan Tersimpan
+              </a>
+            </li>
+            <li class="nav-item">
+              <button id="subscribeLink" class="nav-button">Subscribe</button>
+            </li>
+            <li class="nav-item">
+              <a href="#/" class="nav-link">Beranda</a>
+            </li>
+            <li class="nav-item" id="addStoryWrapper" style="display: none">
+              <a href="#/tambah" class="nav-link">Tambah Story</a>
+            </li>
+            <li class="nav-item">
+              <a href="#/about" class="nav-link">About</a>
+            </li>
+            <li class="nav-item" id="logoutWrapper" style="display: none">
+              <button id="logoutButton" class="nav-button">Logout</button>
+            </li>
+          </ul>
+        </nav>
+        <button id="drawer-button" class="drawer-button">☰</button>
+      </div>
+    </header>
+
+    <main id="main-content" class="main-content"></main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const token = localStorage.getItem("story_token");
+        const logoutWrapper = document.getElementById("logoutWrapper");
+
+        if (logoutWrapper) {
+          logoutWrapper.style.display = token ? "list-item" : "none";
+        }
+
+        const mainContent = document.querySelector("#main-content");
+        const skipLink = document.querySelector(".skip-link");
+
+        if (mainContent && skipLink) {
+          skipLink.addEventListener("click", function (event) {
+            event.preventDefault(); // Hindari reload halaman
+            skipLink.blur(); // Lepaskan fokus dari tombol skip
+            mainContent.focus(); // Fokuskan ke konten utama
+            mainContent.scrollIntoView({ behavior: "smooth" }); // Scroll halus
+          });
+        }
+      });
+    </script>
+  </body>
+  <!-- push Subscription -->
+</html>

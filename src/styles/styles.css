@@ -1,0 +1,868 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #fdfdfd;
+}
+.container {
+  padding-inline: 32px;
+  margin-inline: auto;
+  max-width: 1300px;
+}
+
+header {
+  background-color: rgb(0, 153, 255);
+}
+
+.main-header {
+  min-height: 90px;
+  padding-block: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.brand-name {
+  font-size: 1.125rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+/* Navigation Drawer Styles */
+.navigation-drawer {
+  min-height: 100vh;
+  width: 280px;
+  padding: 1.5rem 1rem;
+  background-color: #0099ff; /* Warna biru untuk background sidebar */
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  transition: transform 350ms ease;
+  z-index: 9999;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.navigation-drawer.open {
+  transform: translateX(0);
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-item {
+  border-radius: 6px;
+  overflow: hidden;
+  transition: background-color 0.2s ease;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Item aktif (Laporan Tersimpan) */
+.nav-item.active {
+  background-color: white;
+}
+
+.nav-item.active .nav-link {
+  color: #0099ff; /* Warna biru untuk teks saat aktif */
+  font-weight: 600;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: white; /* Warna teks default putih */
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-link i {
+  margin-right: 0.75rem;
+  font-size: 1.1rem;
+}
+
+/* Tombol khusus */
+.nav-button {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Subscribe Button */
+#subscribeLink {
+  background-color: #ffc26f;
+  color: #141e16;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+#subscribeLink:hover {
+  background-color: #e6b85a;
+}
+
+/* Logout Button */
+#logoutButton {
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+#logoutButton:hover {
+  background-color: #c0392b;
+}
+
+/* Responsive Styles */
+@media screen and (min-width: 1000px) {
+  .navigation-drawer {
+    position: static;
+    width: auto;
+    min-height: auto;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav-item {
+    border-radius: 6px;
+  }
+
+  .nav-link,
+  .nav-button {
+    padding: 0.5rem 1rem;
+  }
+
+  .nav-link {
+    color: #ffffff; 
+  }
+
+  .nav-item.active .nav-link {
+    color: #0099ff;
+    background-color: transparent;
+  }
+
+  #subscribeLink,
+  #logoutButton {
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* MAIN */
+.main-content {
+  padding-block: 20px;
+}
+
+/* Write your styles more here */
+
+/* Login Page Styling */
+.form-page {
+  width: 100%;
+  max-width: 400px;
+  margin-inline: auto;
+  margin-top: 40px;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-card label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.form-card input[type="text"],
+.form-card input[type="password"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-card input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.form-card button {
+  background-color: lightskyblue;
+  color: #000;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-card button:hover {
+  background-color: deepskyblue;
+}
+
+#loginError {
+  font-size: 0.9rem;
+  color: red;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+
+.form-page p {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.form-page a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.form-page a:hover {
+  text-decoration: underline;
+}
+
+.stories-list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Responsive grid */
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.story-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  overflow: hidden;
+}
+
+.story-card:hover {
+  transform: translateY(-5px);
+}
+
+.story-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.story-card h3 {
+  font-size: 1.125rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.story-card p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.story-card small {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #777;
+}
+/* Home Page Header Layout */
+.page-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+#logoutButton {
+  padding: 8px 16px;
+  background-color: rgb(175, 0, 35);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+#logoutButton:hover {
+  background-color: darkred;
+}
+
+/* Detail Page */
+.detail-section {
+  font-family: "Segoe UI", sans-serif;
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+.report-header {
+  text-align: center;
+  background: #fdf1e7;
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.report-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #3b3b3b;
+}
+
+.meta p {
+  margin: 0.25rem 0;
+  color: #555;
+}
+
+.btn-back {
+  margin-top: 1rem;
+  background-color: #d97706;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.report-image img {
+  display: block;
+  max-width: 100%;
+  border-radius: 16px;
+  margin: auto;
+}
+
+.report-body {
+  margin-top: 2rem;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.report-body h2 {
+  margin-top: 1.5rem;
+  font-size: 1.3rem;
+  color: #222;
+}
+
+.report-body p {
+  color: #444;
+  margin-top: 0.5rem;
+}
+
+.map-container {
+  height: 300px;
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Tombol Kembali */
+.btn-back {
+  background-color: #d97706;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+
+.btn-back:hover {
+  background-color: #b45309;
+}
+
+/* Tombol Simpan */
+.btn-save {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+
+.btn-save:hover {
+  background-color: #059669;
+}
+
+/* Kartu Utama */
+.story-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  max-width: 900px;
+  margin: 2rem auto;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Gambar */
+.story-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Judul */
+.story-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+/* Deskripsi */
+.story-desc {
+  font-size: 1rem;
+  color: #374151;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Tanggal */
+.story-date {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+/* Map */
+.story-map {
+  height: 300px;
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Loader */
+.loader {
+  font-size: 1.5rem;
+  color: #ef4444;
+  text-align: center;
+  padding: 3rem;
+  font-weight: bold;
+}
+
+/* Container tombol aksi */
+.story-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.add-story {
+  max-width: 600px;
+  margin-inline: auto;
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.add-story h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.add-story form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-story label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.add-story input[type="file"],
+.add-story textarea,
+.add-story button {
+  width: 100%;
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.add-story textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+#cameraPreview,
+#photoPreview {
+  margin-top: 0.5rem;
+  border-radius: 6px;
+  max-width: 100%;
+}
+
+.add-story button {
+  background-color: rgb(135, 206, 250);
+  border: none;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-story button:hover {
+  background-color: deepskyblue;
+}
+
+#addStoryError,
+#addStorySuccess {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+#addStoryError {
+  color: red;
+}
+
+#addStorySuccess {
+  color: green;
+}
+
+#map {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 100;
+  text-decoration: none;
+  font-weight: bold;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Bookmark Page Styles */
+.bookmark-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.bookmark-page .page-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.stories-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.story-item {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.story-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.story-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.story-content {
+  padding: 1.25rem;
+}
+
+.story-content h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+.story-content p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.story-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #777;
+  margin-bottom: 1rem;
+}
+
+.story-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.btn-detail {
+  flex: 1;
+  padding: 0.5rem;
+  background: #0099ff;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.btn-detail:hover {
+  background: #0077cc;
+}
+
+.btn-remove {
+  flex: 1;
+  padding: 0.5rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-remove:hover {
+  background: #c0392b;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 3rem;
+  grid-column: 1 / -1;
+}
+
+.empty-message p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #0099ff;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: #0077cc;
+}
+
+.message-container {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  display: none;
+  z-index: 1000;
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .bookmark-page {
+    padding: 1.5rem;
+  }
+
+  .stories-container {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .bookmark-page {
+    padding: 1rem;
+  }
+
+  .bookmark-page .page-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stories-container {
+    grid-template-columns: 1fr;
+  }
+
+  .story-actions {
+    flex-direction: column;
+  }
+
+  .btn-detail,
+  .btn-remove {
+    width: 100%;
+  }
+}
+/* Responsiveness */
+@media (max-width: 600px) {
+  .add-story {
+    margin-inline: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-page {
+    margin-inline: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+@media screen and (width > 1000px) {
+  .navigation-drawer {
+    min-height: auto;
+    width: auto;
+    padding: 0;
+    background-color: transparent;
+
+    flex-direction: row;
+    justify-content: space-between;
+
+    position: static;
+    box-shadow: none;
+    transform: translateX(0);
+  }
+
+  .nav-list {
+    flex-direction: row;
+  }
+
+  .nav-list li a {
+    display: inline-block;
+  }
+
+  .drawer-button {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .add-story {
+    margin-inline: 1rem;
+    padding: 1.5rem;
+  }
+
+  .navigation-drawer {
+    background-color: rgb(0, 153, 255);
+  }
+
+  #logoutButton {
+    background-color: rgb(175, 0, 35);
+    color: white;
+  }
+}
